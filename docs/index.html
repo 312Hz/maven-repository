@@ -1,80 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>增强版 JS 路由</title>
-    <style>
-        .page { display: none; padding: 20px; }
-        .active { display: block; }
-    </style>
+    <title>Hash 路由方案</title>
 </head>
 <body>
     <nav>
-        <button onclick="router.navigate('/')">首页</button>
-        <button onclick="router.navigate('/hello')">Hello</button>
-        <button onclick="router.navigate('/bed')">Bed</button>
-        <button onclick="router.navigate('/about')">About</button>
+        <a href="#/" data-link>首页</a>
+        <a href="#/hello" data-link>Hello</a>
+        <a href="#/bed" data-link>Bed</a>
+        <a href="#/about" data-link>About</a>
     </nav>
 
-    <div id="content">
-    </div>
+    <div id="content"></div>
 
     <script>
-        const router = {
-            routes: {
-                '/': () => '<h1>首页</h1><p>欢迎来到首页</p>',
-                '/hello': () => '<h1>Hello 页面</h1><p>这是 Hello 页面内容</p>',
-                '/bed': () => '<h1>Bed 页面</h1><p>这是 Bed 页面内容</p>',
-                '/about': () => '<h1>About 页面</h1><p>关于我们</p>'
-            },
+        class HashRouter {
+            constructor() {
+                this.routes = {
+                    '/': () => this.render('<h1>首页</h1>'),
+                    '/hello': () => this.render('<h1>Hello</h1><p>Hello页面内容</p>'),
+                    '/bed': () => this.render('<h1>Bed</h1><p>Bed页面内容</p>'),
+                    '/about': () => this.render('<h1>About</h1><p>关于页面</p>')
+                };
+
+                this.init();
+            }
 
             init() {
-                this.checkDirectAccess();
-                
-                window.addEventListener('popstate', () => {
-                    this.render(window.location.pathname);
+                window.addEventListener('hashchange', () => {
+                    this.onHashChange();
                 });
 
-                this.render(window.location.pathname);
-            },
+                this.onHashChange();
+            }
+
+            onHashChange() {
+                const hash = window.location.hash.substring(1) || '/';
+                const handler = this.routes[hash] || this.routes['/'];
+                handler();
+            }
+
+            render(content) {
+                document.getElementById('content').innerHTML = content;
+            }
 
             navigate(path) {
-                history.pushState({}, '', path);
-                this.render(path);
-            },
-
-            render(path) {
-                const content = document.getElementById('content');
-                const routeHandler = this.routes[path] || this.routes['*'];
-                
-                if (routeHandler) {
-                    content.innerHTML = routeHandler();
-                } else {
-                    content.innerHTML = '<h1>404</h1><p>页面未找到</p>';
-                }
-            },
-
-            checkDirectAccess() {
-                const path = window.location.pathname;
-                if (path !== '/' && !this.routes[path]) {
-                    sessionStorage.setItem('targetRoute', path);
-                    window.location.href = '/';
-                }
-            },
-
-            restoreRoute() {
-                const targetRoute = sessionStorage.getItem('targetRoute');
-                if (targetRoute) {
-                    sessionStorage.removeItem('targetRoute');
-                    this.navigate(targetRoute);
-                }
+                window.location.hash = path;
             }
-        };
+        }
 
-        router.init();
+        const router = new HashRouter();
 
-        window.addEventListener('load', () => {
-            if (window.location.pathname === '/') {
-                router.restoreRoute();
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('[data-link]')) {
+                e.preventDefault();
+                router.navigate(e.target.getAttribute('href').substring(1));
             }
         });
     </script>
