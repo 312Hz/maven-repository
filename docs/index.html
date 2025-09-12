@@ -1,62 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hash 路由方案</title>
+    <title>纯JS实现Vue Router功能</title>
 </head>
 <body>
-    <nav>
-        <a href="#/" data-link>首页</a>
-        <a href="#/hello" data-link>Hello</a>
-        <a href="#/bed" data-link>Bed</a>
-        <a href="#/about" data-link>About</a>
-    </nav>
+    <div id="app">
+        <nav>
+            <a href="/" class="nav-link">首页</a>
+            <a href="/about" class="nav-link">关于</a>
+            <a href="/contact" class="nav-link">联系</a>
+        </nav>
 
-    <div id="content"></div>
+        <main id="router-view"></main>
+    </div>
 
     <script>
-        class HashRouter {
+        class JSRouter {
             constructor() {
                 this.routes = {
-                    '/': () => this.render('<h1>首页</h1>'),
-                    '/hello': () => this.render('<h1>Hello</h1><p>Hello页面内容</p>'),
-                    '/bed': () => this.render('<h1>Bed</h1><p>Bed页面内容</p>'),
-                    '/about': () => this.render('<h1>About</h1><p>关于页面</p>')
+                    '/': this.homeComponent,
+                    '/about': this.aboutComponent, 
+                    '/contact': this.contactComponent
                 };
-
+                
                 this.init();
             }
 
             init() {
-                window.addEventListener('hashchange', () => {
-                    this.onHashChange();
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('nav-link')) {
+                        e.preventDefault();
+                        this.navigate(e.target.getAttribute('href'));
+                    }
                 });
 
-                this.onHashChange();
-            }
+                window.addEventListener('popstate', () => {
+                    this.renderCurrentRoute();
+                });
 
-            onHashChange() {
-                const hash = window.location.hash.substring(1) || '/';
-                const handler = this.routes[hash] || this.routes['/'];
-                handler();
-            }
-
-            render(content) {
-                document.getElementById('content').innerHTML = content;
+                this.renderCurrentRoute();
             }
 
             navigate(path) {
-                window.location.hash = path;
+                history.pushState({}, '', path);
+                this.renderCurrentRoute();
+            }
+
+            replace(path) {
+                history.replaceState({}, '', path);
+                this.renderCurrentRoute();
+            }
+
+            renderCurrentRoute() {
+                const path = window.location.pathname;
+                const handler = this.routes[path] || this.notFoundComponent;
+                
+                const routerView = document.getElementById('router-view');
+                routerView.innerHTML = handler();
+                
+                this.updateDocumentTitle(path);
+            }
+
+            homeComponent() {
+                return `
+                    <h1>首页</h1>
+                    <p>欢迎来到首页！这是纯JS实现的路由效果</p>
+                    <button onclick="router.navigate('/about')">去关于页面</button>
+                `;
+            }
+
+            aboutComponent() {
+                return `
+                    <h1>关于我们</h1>
+                    <p>这是关于页面，URL很干净吧？</p>
+                    <p>当前路径: ${window.location.pathname}</p>
+                `;
+            }
+
+            contactComponent() {
+                return `
+                    <h1>联系我们</h1>
+                    <form>
+                        <input type="text" placeholder="姓名">
+                        <input type="email" placeholder="邮箱">
+                        <button type="submit">提交</button>
+                    </form>
+                `;
+            }
+
+            notFoundComponent() {
+                return `
+                    <h1>404 - 页面未找到</h1>
+                    <p>路径 ${window.location.pathname} 不存在</p>
+                    <button onclick="router.navigate('/')">返回首页</button>
+                `;
+            }
+
+            updateDocumentTitle(path) {
+                const titles = {
+                    '/': '首页 - 我的应用',
+                    '/about': '关于我们 - 我的应用', 
+                    '/contact': '联系我们 - 我的应用'
+                };
+                document.title = titles[path] || '404 - 我的应用';
             }
         }
 
-        const router = new HashRouter();
+        const router = new JSRouter();
 
-        document.addEventListener('click', (e) => {
-            if (e.target.matches('[data-link]')) {
-                e.preventDefault();
-                router.navigate(e.target.getAttribute('href').substring(1));
-            }
-        });
+        window.router = router;
     </script>
+
+    <style>
+        .nav-link {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color: #007bff;
+        }
+        #router-view {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </body>
 </html>
