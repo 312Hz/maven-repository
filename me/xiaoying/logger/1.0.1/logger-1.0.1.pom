@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>me.xiaoying</groupId>
+    <artifactId>logger</artifactId>
+    <version>1.0.1</version>
+    <name>Logger Library</name>
+    <url>https://github.com/hanhan2001/logger</url>
+    <developers>
+        <developer>
+            <id>xiaoying</id>
+            <name>Xiao Ying</name>
+            <email>764932129@qq.com</email>
+        </developer>
+    </developers>
+</project>
