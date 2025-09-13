@@ -50,9 +50,10 @@ class Router {
         // array
         for (let i = 0; i < component.path().length; i++) {
             let path = component.path()[i];
-            if (!path.startsWith('/')) {
+
+            if (!path.startsWith('/'))
                 path = '/' + path;
-            }
+
             this.pages[path] = component;
         }
     }
