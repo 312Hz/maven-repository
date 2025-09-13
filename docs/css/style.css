@@ -13,3 +13,7 @@
 	border-radius: 3px;
 	cursor: pointer;
 }
+
+a {
+	text-decoration: none;
+}

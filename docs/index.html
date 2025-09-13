@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>仓库服务</title>
@@ -19,23 +19,26 @@
     <div class="content">
         <div class="sidebar">
             <ul class="sidebar_nav">
-                <li class="sidebar_nav_item">
+                <li id="index" class="sidebar_nav_item active">
                     <span>
-                        <img src="./icons/search.svg" alt="search">
+                        <img class="icon_normal" src="icons/search-normal.svg" alt="search">
+                        <img class="icon_active" src="icons/search-active.svg" alt="search">
                     </span>
-                    指南
+                    <a href="#/index" data-link>指南</a>
                 </li>
-                <li class="sidebar_nav_item selected">
+                <li id="search" class="sidebar_nav_item">
                     <span>
-                        <img src="./icons/search.svg" alt="search">
+                        <img class="icon_normal" src="icons/search-normal.svg" alt="search">
+                        <img class="icon_active" src="icons/search-active.svg" alt="search">
                     </span>
-                    文件搜索
+                    <a href="#/search" data-link>文件搜索</a>
                 </li>
-                <li class="sidebar_nav_item">
+                <li id="repo" class="sidebar_nav_item">
                     <span>
-                        <img src="./icons/search.svg" alt="search">
+                        <img class="icon_normal" src="icons/search-normal.svg" alt="search">
+                        <img class="icon_active" src="icons/search-active.svg" alt="search">
                     </span>
-                    仓库文件
+                    <a href="#/repo" data-link>仓库文件</a>
                 </li>
             </ul>
         </div>

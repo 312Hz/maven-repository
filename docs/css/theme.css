@@ -10,6 +10,6 @@
 	background-color: #EFEFEF;
 }
 
-.sidebar .sidebar_nav .sidebar_nav_item.selected {
+.sidebar .sidebar_nav .sidebar_nav_item.active {
 	background-color: #F2FBFF;
 }
