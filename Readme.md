@@ -6,8 +6,6 @@
 
 直接访问: `https://312Hz.github.io/maven-repository`
 
-如果对静态网页的技术感兴趣可以访问: 
-
 
 
 ## 仓库配置
