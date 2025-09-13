@@ -1,140 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>纯JS实现Vue Router功能</title>
+    <meta charset="UTF-8">
+    <title>仓库服务</title>
+    <script src="./js/router.js"></script>
 </head>
 <body>
-    <div id="app">
-        <nav>
-            <a href="/" class="nav-link">首页</a>
-            <a href="/about" class="nav-link">关于</a>
-            <a href="/contact" class="nav-link">联系</a>
-        </nav>
-
-        <main id="router-view"></main>
+<div class="wrapper">
+    <div class="header">
+        <h1>312Hz</h1>
     </div>
-
-    <script>
-        class JSRouter {
-            constructor() {
-                this.routes = {
-                    '/': this.homeComponent,
-                    '/about': this.aboutComponent, 
-                    '/contact': this.contactComponent
-                };
-                
-                this.init();
-            }
-
-            init() {
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('nav-link')) {
-                        e.preventDefault();
-                        this.navigate(e.target.getAttribute('href'));
-                    }
-                });
-
-                window.addEventListener('popstate', () => {
-                    this.renderCurrentRoute();
-                });
-
-                this.renderCurrentRoute();
-            }
-
-            navigate(path) {
-                history.pushState({}, '', path);
-                this.renderCurrentRoute();
-            }
-
-            replace(path) {
-                history.replaceState({}, '', path);
-                this.renderCurrentRoute();
-            }
-
-            renderCurrentRoute() {
-                const path = window.location.pathname;
-                const handler = this.routes[path] || this.notFoundComponent;
-                
-                const routerView = document.getElementById('router-view');
-                routerView.innerHTML = handler();
-                
-                this.updateDocumentTitle(path);
-            }
-
-            homeComponent() {
-                return `
-                    <h1>首页</h1>
-                    <p>欢迎来到首页！这是纯JS实现的路由效果</p>
-                    <button onclick="router.navigate('/about')">去关于页面</button>
-                `;
-            }
-
-            aboutComponent() {
-                return `
-                    <h1>关于我们</h1>
-                    <p>这是关于页面，URL很干净吧？</p>
-                    <p>当前路径: ${window.location.pathname}</p>
-                `;
-            }
-
-            contactComponent() {
-                return `
-                    <h1>联系我们</h1>
-                    <form>
-                        <input type="text" placeholder="姓名">
-                        <input type="email" placeholder="邮箱">
-                        <button type="submit">提交</button>
-                    </form>
-                `;
-            }
-
-            notFoundComponent() {
-                return `
-                    <h1>404 - 页面未找到</h1>
-                    <p>路径 ${window.location.pathname} 不存在</p>
-                    <button onclick="router.navigate('/')">返回首页</button>
-                `;
-            }
-
-            updateDocumentTitle(path) {
-                const titles = {
-                    '/': '首页 - 我的应用',
-                    '/about': '关于我们 - 我的应用', 
-                    '/contact': '联系我们 - 我的应用'
-                };
-                document.title = titles[path] || '404 - 我的应用';
-            }
-        }
-
-        const router = new JSRouter();
-
-        window.router = router;
-    </script>
-
-    <style>
-        .nav-link {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .nav-link:hover {
-            color: #007bff;
-        }
-        #router-view {
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        button {
-            padding: 10px 15px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
+    <div id="router"></div>
+</div>
 </body>
 </html>
