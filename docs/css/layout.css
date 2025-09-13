@@ -28,7 +28,7 @@
 
 .content {
 	width: 95%;
-	height: calc(100% - 50px);
+	height: calc(100% - 70px);
 	margin: 20px auto 0;
 	display: flex;
 }
