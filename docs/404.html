@@ -4,8 +4,54 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>404 Page</title>
+	<style type="text/css">
+		.view_title {
+			font-size: 18px;
+		}
+
+		.table_head_col {
+			font-size: 12px;
+		}
+
+		.table_body_row {
+			width: 100%;
+			background-color: aqua;
+		}
+
+		.table_body_row_col:first-child {
+			position: relative;
+		}
+
+		.table_body_row_col:first-child .icon {
+			position: absolute;
+			transform: ;
+		}
+	</style>
 </head>
 <body>
-
+	<div class="view_header">
+		<p class="view_title">仓库文件</p>
+	</div>
+	<div class="next_table" style="margin-top: 30px">
+		<table style="width: 100%;" cellspacing="0">
+			<thead>
+				<tr>
+					<td class="table_head_col table_head_repo" style="width: 40%;">Repository</td>
+					<td class="table_head_col table_head_path" style="width: 50%;">Path</td>
+					<td class="table_head_col table_head_ops" style="width: 10%;">操作</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="table_body_row">
+					<td class="table_body_row_col repo">
+						<span class="icon">l</span>
+						<span class="name">logger</span>
+					</td>
+					<td class="table_body_row_col path">https://312hz.github.io/maven-repository/me/xiaoying/logger</td>
+					<td class="table_body_row_col ops">详情</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
