@@ -1,0 +1,103 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "me.xiaoying",
+    "module": "sqlfactory",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.9"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "sqlfactory-1.0.0.jar",
+          "url": "sqlfactory-1.0.0.jar",
+          "size": 44990,
+          "sha512": "cf56bd512a9fab9884467505fe85eea60288dd0059157cefb99e7ee7e43909600e69e66dce0ce04d622a7b98c3d0ce3ad183214acecda014671a8209fd2013f1",
+          "sha256": "d573f5277dd69ae838002ed41efafa3b364dff3e8c041ed23377d465de719005",
+          "sha1": "891649724a8e09b3cd94dac45f9b4b4c63450d29",
+          "md5": "44b0fa21c00a204d35680ef5ed82983b"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.xerial",
+          "module": "sqlite-jdbc",
+          "version": {
+            "requires": "3.49.1.0"
+          }
+        },
+        {
+          "group": "com.mysql",
+          "module": "mysql-connector-j",
+          "version": {
+            "requires": "9.2.0"
+          }
+        },
+        {
+          "group": "org.postgresql",
+          "module": "postgresql",
+          "version": {
+            "requires": "42.7.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sqlfactory-1.0.0.jar",
+          "url": "sqlfactory-1.0.0.jar",
+          "size": 44990,
+          "sha512": "cf56bd512a9fab9884467505fe85eea60288dd0059157cefb99e7ee7e43909600e69e66dce0ce04d622a7b98c3d0ce3ad183214acecda014671a8209fd2013f1",
+          "sha256": "d573f5277dd69ae838002ed41efafa3b364dff3e8c041ed23377d465de719005",
+          "sha1": "891649724a8e09b3cd94dac45f9b4b4c63450d29",
+          "md5": "44b0fa21c00a204d35680ef5ed82983b"
+        }
+      ]
+    },
+    {
+      "name": "shadowRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "shadowed",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "sqlfactory-1.0.0-all.jar",
+          "url": "sqlfactory-1.0.0-all.jar",
+          "size": 20136893,
+          "sha512": "a9804633c80e8fbba3a2bc855fda9b4d40eed3f76c12c181911cc9a6acb879e259c87c976ef86e7c7736c2f8e19d94fa512aaab30568b157e4bbb87a7c264deb",
+          "sha256": "bece6efa28b2f48b054885a765b4260d4963dc725606d748b90e7d8885614902",
+          "sha1": "68e3bcad8aad57993c33d09d08284b7afd438d80",
+          "md5": "b0c3dfdee196c6efa6f17564dec3d2f3"
+        }
+      ]
+    }
+  ]
+}
